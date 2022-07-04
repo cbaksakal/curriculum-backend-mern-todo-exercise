@@ -19,7 +19,9 @@ const user_1 = __importDefault(require("../models/user"));
 const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
+        console.log("HEADER: ", req.headers);
         const token = (_a = req.header('Authorization')) === null || _a === void 0 ? void 0 : _a.replace('Bearer ', '');
+        console.log("TOKEN: ", token);
         if (!token)
             return res.status(401).send('no token provided');
         //TODO: FIX "any" here too.

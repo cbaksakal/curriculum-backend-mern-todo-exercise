@@ -1,12 +1,13 @@
 import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import User from "../../models/user";
+import User, { IUser } from "../../models/user";
 import keys from "../../config/keys";
+import { Request, Response } from 'express'
 
 //TODO: replace all "any" in all endpoints.
-const signup = async (req: any, res: any) => {
+const signup = async (req: Request, res: Response) => {
 
-    const {email, password, fullName} = req.body;
+    const { email, password, fullName } = req.body as Pick<IUser, "_id" | "fullName" | "email" | "password">;
 
     if (!email || !password || !fullName) {
         return res
@@ -29,14 +30,14 @@ const signup = async (req: any, res: any) => {
         fullName: fullName
     });
 
-    const payload = {email: req.body.email};
+    const payload = { email: req.body.email as Pick<IUser, "email"> };
     const token = jwt.sign(payload, keys.SECRET_KEY);
 
     res.json({token});
 }
 
-const login = async (req: any, res: any) => {
-    const {email, password} = req.body;
+const login = async (req: Request, res: Response) => {
+    const { email, password } = req.body as Pick<IUser, "_id" | "fullName" | "email" | "password">;
 
     if (!email || !password) {
         return res
@@ -58,11 +59,14 @@ const login = async (req: any, res: any) => {
             .json({error: `password is wrong`, status: 'error'});
     }
 
-    const payload = {email: req.body.email};
+    const payload = { email: req.body.email as Pick<IUser, "email"> };
     const token = jwt.sign(payload, keys.SECRET_KEY);
 
     res.json({token});
 }
 
+export interface IToken {
+    email: string;
+}
 
 export {signup, login}

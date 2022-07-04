@@ -1,8 +1,15 @@
-import { model, Schema } from 'mongoose'
+import { model, Schema, Types } from 'mongoose'
 
 //TODO: Add types for schema
+export interface ITodo {
+    _id: Types.ObjectId;
+    name: string;
+    description: string;
+    status: boolean;
+    user: Types.ObjectId;
+};
 
-const todoSchema: Schema = new Schema({
+const todoSchema: Schema<ITodo> = new Schema({
     name: {
         type: String,
         required: true
@@ -23,4 +30,4 @@ const todoSchema: Schema = new Schema({
 }, { timestamps: true })
 
 
-export default model('Todo', todoSchema)
+export default model<ITodo>('Todo', todoSchema)

@@ -6,6 +6,6 @@ const auth_1 = require("../middlewares/auth");
 const router = (0, express_1.Router)();
 router.get('/', todos_1.getTodos);
 router.post('/', auth_1.auth, todos_1.addTodo);
-router.patch('/:id', todos_1.updateTodo);
-router.delete('/:id', todos_1.deleteTodo);
+router.patch('/:id', auth_1.auth, todos_1.updateTodo);
+router.delete('/:id', auth_1.auth, todos_1.deleteTodo);
 exports.default = router;

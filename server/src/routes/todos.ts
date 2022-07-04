@@ -8,8 +8,8 @@ router.get('/', getTodos);
 
 router.post('/', auth, addTodo);
 
-router.patch('/:id', updateTodo);
+router.patch('/:id', auth, updateTodo);
 
-router.delete('/:id', deleteTodo);
+router.delete('/:id', auth, deleteTodo);
 
 export default router

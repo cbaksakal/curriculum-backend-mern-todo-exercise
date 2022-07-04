@@ -5,8 +5,10 @@
     "outDir": "dist/js",
     "rootDir": "src",
     "strict": true,
+    "noImplicitAny": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots" : ["src/types/*.ts", "./node_modules/@types"]
   },
   "include": ["src/**/*"],
   "exclude": ["src/types/*.ts", "node_modules", ".vscode"]

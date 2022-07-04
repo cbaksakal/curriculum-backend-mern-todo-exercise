@@ -1,7 +1,15 @@
-import {model, Schema} from 'mongoose'
+import { model, Schema, Types } from 'mongoose'
+
+// Create an interface representing a document in MongoDB.
+export interface IUser {
+    _id: Types.ObjectId;
+    fullName: string;
+    email: string;
+    password: string;
+};
 
 //TODO: Add types for schema
-const userSchema: Schema = new Schema({
+const userSchema: Schema<IUser> = new Schema<IUser>({
     fullName: {
         type: String,
         required: true
@@ -18,4 +26,4 @@ const userSchema: Schema = new Schema({
 
 }, {timestamps: true})
 
-export default model('User', userSchema)
+export default model<IUser>('User', userSchema)
